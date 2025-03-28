@@ -1,0 +1,22 @@
+digraph {
+    node0x55d6d9591940 [shape = "Mrecord",  label=" {ptr = 0x55d6d9591940 | str = 555 | {<f0> left = 0x55d6d9591980 | <f1> right = 0x55d6d9591a40}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55d6d9591940:<f0> -> node0x55d6d9591980
+    node0x55d6d9591940:<f1> -> node0x55d6d9591a40
+
+    node0x55d6d9591980 [shape = "Mrecord",  label=" {ptr = 0x55d6d9591980 | str = 111 | {<f0> left = 0x55d6d95919c0 | <f1> right = 0x55d6d9591a00}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55d6d9591980:<f0> -> node0x55d6d95919c0
+    node0x55d6d9591980:<f1> -> node0x55d6d9591a00
+
+    node0x55d6d95919c0 [shape = "Mrecord",  label=" {ptr = 0x55d6d95919c0 | str = 000 | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+
+    node0x55d6d9591a00 [shape = "Mrecord",  label=" {ptr = 0x55d6d9591a00 | str = 222 | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+
+    node0x55d6d9591a40 [shape = "Mrecord",  label=" {ptr = 0x55d6d9591a40 | str = 777 | {<f0> left = 0x55d6d9591a80 | <f1> right = 0x55d6d9591ac0}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55d6d9591a40:<f0> -> node0x55d6d9591a80
+    node0x55d6d9591a40:<f1> -> node0x55d6d9591ac0
+
+    node0x55d6d9591a80 [shape = "Mrecord",  label=" {ptr = 0x55d6d9591a80 | str = 666 | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+
+    node0x55d6d9591ac0 [shape = "Mrecord",  label=" {ptr = 0x55d6d9591ac0 | str = 999 | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+
+}
