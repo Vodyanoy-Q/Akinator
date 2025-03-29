@@ -1,19 +1,31 @@
-555
+Animal?
 (
-    111
+    EDA?
     (
-        000
+        STUL
     )
     (
-        222
+        PELMENY(s baraninoy)
     )
 )
 (
-    777
+    Cute?
     (
-        666
+        small
+        (
+            Human
+        )
+        (
+            can fly
+            (
+                tarakan
+            )
+            (
+                fly
+            )
+        )
     )
     (
-        999
+        Cat
     )
 )

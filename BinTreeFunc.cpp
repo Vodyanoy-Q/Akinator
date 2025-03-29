@@ -181,7 +181,7 @@ ERROR FprintTree(TreeNode* node, FILE* file, int tab)
     return NO_ERROR;
 }
 
-ERROR TreeFromFile(char* file_name, TreeNode** node)
+ERROR TreeFromFile(const char* file_name, TreeNode** node)
 {
     MY_ASSERT(file_name, ADDRESS_ERROR);
     MY_ASSERT(node,      ADDRESS_ERROR);
@@ -208,7 +208,7 @@ ERROR TreeFromFile(char* file_name, TreeNode** node)
 
     int str_count = 0;
 
-    GetStrCount(buff, &str_count);
+    GetStrCount(buff, &str_count); //
 
     int pos = 0;
 
@@ -221,8 +221,9 @@ ERROR TreeFromFile(char* file_name, TreeNode** node)
 
 ERROR RecTreeFromFile(char* buff, int* pos, int tab, TreeNode** node)
 {
-    *pos += tab * 4;
-
+    *pos += tab * 4;  // tab = 9 = \t
+                      // isspace
+                      // strchr
     int len = strlen(buff + *pos);
 
     char* str = strndup(buff + *pos, len + 1);
@@ -261,6 +262,140 @@ ERROR GetSpaceCount(char* buff, int pos, int* space_count)
     for (; *(buff + i + pos) == ' '; i++);
 
     *space_count = i;
+
+    return NO_ERROR;
+}
+
+ERROR AkinatorRun()
+{
+    char* str = NULL;
+    TreeNode* tree = NULL;
+
+    while (true)
+    {
+        INPUT(str, ERROR_INPUT);  //strcasecmp   stricmp or _stricmp   // q = quit
+
+        if      (strcmp(str, "quit")  == 0) {free(str); break;}
+        else if (strcmp(str, "play")  == 0) AkinatorPlay(&tree, "Base.txt");
+        else if (strcmp(str, "graph") == 0) AkinatorGraph(tree);
+        else if (strcmp(str, "save")  == 0) AkinatorSave(tree);
+        else if (strcmp(str, "new")   == 0) AkinatorNew();
+        else    ERROR_INPUT;
+
+        free(str);
+    }
+
+    return NO_ERROR;
+}
+
+ERROR AkinatorPlay(TreeNode** tree, const char* file_name)
+{
+    MY_ASSERT(tree, ADDRESS_ERROR);
+
+    if (*tree == NULL)                    //TODO
+    {
+        TreeFromFile(file_name, tree);
+    }
+
+    TreeNode* cur = *tree;
+    char* str = NULL;
+
+    while (true)
+    {
+        if (cur->left == NULL && cur->right == NULL)
+        {
+            AkinatorGuess(cur);
+            //GREEN_TEXT("Wanna play again?\n");
+
+            // int cont = 0;
+            // while (true)
+            // {
+            //     INPUT(str, RED_TEXT("Enter yes or no. Try again.\n"));
+            //     if      (strcmp(str, "yes") == 0) cont = 1;
+            //     else if (strcmp(str, "no") == 0)  cur = cur->left;
+            // }
+            break;
+        }
+
+        printf(MAGN "%s\n" RESET_COLOR, cur->data);
+
+        INPUT(str, RED_TEXT("Enter yes or no. Try again.\n"));
+
+        if      (strcmp(str, "yes") == 0) cur = cur->right;
+        else if (strcmp(str, "no") == 0)  cur = cur->left;
+        else    RED_TEXT("Enter yes or no. Try again.\n");
+        free(str);
+    }
+
+    return NO_ERROR;
+}
+ERROR AkinatorGraph(TreeNode* tree)
+{
+    TreeDump(tree);
+
+    return NO_ERROR;
+}
+ERROR AkinatorSave(TreeNode* tree)
+{
+    char str[10] = "Base.txt";
+
+    TreeToFile(str, tree);
+
+    return NO_ERROR;
+}
+ERROR AkinatorNew()
+{
+    return NO_ERROR;
+}
+
+ERROR AkinatorGuess(TreeNode* cur)
+{
+    MY_ASSERT(cur, ADDRESS_ERROR);
+
+    printf(CYAN "Is this " RESET_COLOR);
+    printf(YELLOW "%s?\n" RESET_COLOR, cur->data);
+
+    char* str = NULL;
+
+    while (true)
+    {
+        INPUT(str, RED_TEXT("Enter yes or no. Try again.\n"));
+        if (strcmp(str, "yes") == 0 || strcmp(str, "no") == 0) break;
+    }
+
+    if      (strcmp(str, "yes") == 0)
+    {
+        YELLOW_TEXT("GG WP EZ GAME I GUESS\n");
+    }
+    else if (strcmp(str, "no") == 0)
+    {
+        BLUE_TEXT( "Oh no, I did not guess(((((\n" );
+        CYAN_TEXT("But who(what) is this?\n");
+        while (true)
+        {
+            INPUT(str, RED_TEXT("Enter thing which you thought.\n"));
+            break;
+        }
+        printf(CYAN   "What different between " RESET_COLOR);
+        printf(YELLOW "%s" RESET_COLOR, str);
+        printf(CYAN   " and " RESET_COLOR);
+        printf(YELLOW "%s" RESET_COLOR, cur->data);
+        printf(CYAN   "?\n" RESET_COLOR);
+
+        char* diff = NULL;
+        while (true)
+        {
+            INPUT(diff, RED_TEXT("Enter difference.\n"));
+            break;
+        }
+
+        CreateNode(&cur->left, cur->data);
+        CreateNode(&cur->right, str);
+
+        cur->data = diff;
+    }
+
+
 
     return NO_ERROR;
 }
