@@ -14,8 +14,7 @@ enum ERROR
     FILE_READ_ERROR   = 7,
     POP_ERROR         = 8,
     CHANGE_ERROR      = 9,
-    STK_ADDRESS_ERROR = 10,
-    QUIT              = 11
+    STK_ADDRESS_ERROR = 10
 };
 
 #endif //_ERRORS_H_
