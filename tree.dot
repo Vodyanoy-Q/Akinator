@@ -1,43 +1,46 @@
 digraph {
-    node0x55d014e32a60 [shape = "Mrecord",  label=" {ptr = 0x55d014e32a60 | str = Animal? | {<f0> left = 0x55d014e32aa0 | <f1> right = 0x55d014e32b60}} ", style="filled", fillcolor="#BEDAFF"]
-    node0x55d014e32a60:<f0> -> node0x55d014e32aa0
-    node0x55d014e32a60:<f1> -> node0x55d014e32b60
+    node0x55923afeaf40 [shape = "Mrecord",  label=" {ptr = 0x55923afeaf40 | str = Animal | {<f0> left = 0x55923afeaf80 | <f1> right = 0x55923afeb040}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeaf40:<f0> -> node0x55923afeaf80
+    node0x55923afeaf40:<f1> -> node0x55923afeb040
 
-    node0x55d014e32aa0 [shape = "Mrecord",  label=" {ptr = 0x55d014e32aa0 | str = EDA? | {<f0> left = 0x55d014e32ae0 | <f1> right = 0x55d014e32b20}} ", style="filled", fillcolor="#BEDAFF"]
-    node0x55d014e32aa0:<f0> -> node0x55d014e32ae0
-    node0x55d014e32aa0:<f1> -> node0x55d014e32b20
+    node0x55923afeaf80 [shape = "Mrecord",  label=" {ptr = 0x55923afeaf80 | str = EDA | {<f0> left = 0x55923afeafc0 | <f1> right = 0x55923afeb000}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeaf80:<f0> -> node0x55923afeafc0
+    node0x55923afeaf80:<f1> -> node0x55923afeb000
 
-    node0x55d014e32ae0 [shape = "Mrecord",  label=" {ptr = 0x55d014e32ae0 | str = STUL | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeafc0 [shape = "Mrecord",  label=" {ptr = 0x55923afeafc0 | str = STUL | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
 
-    node0x55d014e32b20 [shape = "Mrecord",  label=" {ptr = 0x55d014e32b20 | str = PELMENY(s baraninoy) | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb000 [shape = "Mrecord",  label=" {ptr = 0x55923afeb000 | str = PELMENY(s baraninoy) | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
 
-    node0x55d014e32b60 [shape = "Mrecord",  label=" {ptr = 0x55d014e32b60 | str = Cute? | {<f0> left = 0x55d014e32ba0 | <f1> right = 0x55d014e32ce0}} ", style="filled", fillcolor="#BEDAFF"]
-    node0x55d014e32b60:<f0> -> node0x55d014e32ba0
-    node0x55d014e32b60:<f1> -> node0x55d014e32ce0
+    node0x55923afeb040 [shape = "Mrecord",  label=" {ptr = 0x55923afeb040 | str = Cute | {<f0> left = 0x55923afeb080 | <f1> right = 0x55923afeb240}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb040:<f0> -> node0x55923afeb080
+    node0x55923afeb040:<f1> -> node0x55923afeb240
 
-    node0x55d014e32ba0 [shape = "Mrecord",  label=" {ptr = 0x55d014e32ba0 | str = small | {<f0> left = 0x55d014e32be0 | <f1> right = 0x55d014e32c20}} ", style="filled", fillcolor="#BEDAFF"]
-    node0x55d014e32ba0:<f0> -> node0x55d014e32be0
-    node0x55d014e32ba0:<f1> -> node0x55d014e32c20
+    node0x55923afeb080 [shape = "Mrecord",  label=" {ptr = 0x55923afeb080 | str = small | {<f0> left = 0x55923afeb0c0 | <f1> right = 0x55923afeb180}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb080:<f0> -> node0x55923afeb0c0
+    node0x55923afeb080:<f1> -> node0x55923afeb180
 
-    node0x55d014e32be0 [shape = "Mrecord",  label=" {ptr = 0x55d014e32be0 | str = Human | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb0c0 [shape = "Mrecord",  label=" {ptr = 0x55923afeb0c0 | str = live in water | {<f0> left = 0x55923afeb100 | <f1> right = 0x55923afeb140}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb0c0:<f0> -> node0x55923afeb100
+    node0x55923afeb0c0:<f1> -> node0x55923afeb140
 
-    node0x55d014e32c20 [shape = "Mrecord",  label=" {ptr = 0x55d014e32c20 | str = can fly | {<f0> left = 0x55d014e32c60 | <f1> right = 0x55d014e32ca0}} ", style="filled", fillcolor="#BEDAFF"]
-    node0x55d014e32c20:<f0> -> node0x55d014e32c60
-    node0x55d014e32c20:<f1> -> node0x55d014e32ca0
+    node0x55923afeb100 [shape = "Mrecord",  label=" {ptr = 0x55923afeb100 | str = Human | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
 
-    node0x55d014e32c60 [shape = "Mrecord",  label=" {ptr = 0x55d014e32c60 | str = tarakan | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb140 [shape = "Mrecord",  label=" {ptr = 0x55923afeb140 | str = shark | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
 
-    node0x55d014e32ca0 [shape = "Mrecord",  label=" {ptr = 0x55d014e32ca0 | str = fly | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb180 [shape = "Mrecord",  label=" {ptr = 0x55923afeb180 | str = can fly | {<f0> left = 0x55923afeb1c0 | <f1> right = 0x55923afeb200}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb180:<f0> -> node0x55923afeb1c0
+    node0x55923afeb180:<f1> -> node0x55923afeb200
 
-    node0x55d014e32ce0 [shape = "Mrecord",  label=" {ptr = 0x55d014e32ce0 | str = ) | {<f0> left = 0x55d014e32d20 | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
-    node0x55d014e32ce0:<f0> -> node0x55d014e32d20
+    node0x55923afeb1c0 [shape = "Mrecord",  label=" {ptr = 0x55923afeb1c0 | str = tarakan | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
 
-    node0x55d014e32d20 [shape = "Mrecord",  label=" {ptr = 0x55d014e32d20 | str = can say gav? | {<f0> left = 0x55d014e32d60 | <f1> right = 0x55d014e32da0}} ", style="filled", fillcolor="#BEDAFF"]
-    node0x55d014e32d20:<f0> -> node0x55d014e32d60
-    node0x55d014e32d20:<f1> -> node0x55d014e32da0
+    node0x55923afeb200 [shape = "Mrecord",  label=" {ptr = 0x55923afeb200 | str = fly | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
 
-    node0x55d014e32d60 [shape = "Mrecord",  label=" {ptr = 0x55d014e32d60 | str = Cat | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb240 [shape = "Mrecord",  label=" {ptr = 0x55923afeb240 | str = can say gav | {<f0> left = 0x55923afeb280 | <f1> right = 0x55923afeb2c0}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb240:<f0> -> node0x55923afeb280
+    node0x55923afeb240:<f1> -> node0x55923afeb2c0
 
-    node0x55d014e32da0 [shape = "Mrecord",  label=" {ptr = 0x55d014e32da0 | str = dog | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+    node0x55923afeb280 [shape = "Mrecord",  label=" {ptr = 0x55923afeb280 | str = Cat | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
+
+    node0x55923afeb2c0 [shape = "Mrecord",  label=" {ptr = 0x55923afeb2c0 | str = dog | {<f0> left = (nil) | <f1> right = (nil)}} ", style="filled", fillcolor="#BEDAFF"]
 
 }

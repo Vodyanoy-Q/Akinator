@@ -1,6 +1,6 @@
-Animal?
+Animal
 (
-    EDA?
+    EDA
     (
         STUL
     )
@@ -9,11 +9,17 @@ Animal?
     )
 )
 (
-    Cute?
+    Cute
     (
         small
         (
-            Human
+            live in water
+            (
+                Human
+            )
+            (
+                shark
+            )
         )
         (
             can fly
@@ -26,7 +32,7 @@ Animal?
         )
     )
     (
-        can say gav?
+        can say gav
         (
             Cat
         )

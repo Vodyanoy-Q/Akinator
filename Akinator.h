@@ -4,21 +4,31 @@
 #include "Errors.h"
 #include "colors.h"
 #include "BinTree.h"
+#include "Stack.h"
 
-#define INSTRUCTIONS printf(CYAN "Enter:\n"                                                  \
-                                 "[play]  to play with ready-made database\n"                \
-                                 "[quit]  to quit\n"                                         \
-                                 "[graph] to create graph of database tree\n"                \
-                                 "[save]  to save new data in database\n"                    \
-                                 "[def]   to start new database and play\n" RESET_COLOR);    \
+enum FoundCondition
+{
+    NOT_FOUND = 0,
+    FOUND     = 1
+};
 
+enum WAY
+{
+    LEFT  = 0,
+    RIGHT = 1
+};
 
 ERROR AkinatorRun();
 ERROR AkinatorPlay(TreeNode** tree);
 ERROR AkinatorGraph(TreeNode* tree);
 ERROR AkinatorSave(TreeNode* tree, char* file_name);
-ERROR AkinatorDef();
+ERROR AkinatorDef(TreeNode* tree);
 ERROR AkinatorGuess(TreeNode* cur);
 ERROR GetInputFile(char** file_name, TreeNode** tree);
+ERROR AkinatorFind(TreeNode* cur, Stack* stk, const char* word, FoundCondition* ret_val);
+ERROR AkinatorDifference(TreeNode* tree);
+ERROR Instructions();
+ERROR PrintDifference(Stack* stk);
+ERROR CreateDefNode(DefNode** ret_ptr, char way, char* str);
 
 #endif //_AKINATOR_H_

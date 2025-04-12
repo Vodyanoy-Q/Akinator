@@ -7,9 +7,11 @@
 
 int main()
 {
-    printf(CYAN "Hello! Welcome to GuessInator 2000.\n" RESET_COLOR);
+    CYAN_TEXT( "Hello! Welcome to GuessInator 2000.\n");
 
     AkinatorRun();
+
+    YELLOW_TEXT("Come back soon, goodbye!\n");
 
     return NO_ERROR;
 }

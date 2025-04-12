@@ -9,8 +9,8 @@
 
 ERROR InputAnswer(char** str, const char* error_message)
 {
-    MY_ASSERT(str,           ADDRESS_ERROR);
-    MY_ASSERT(error_message, ADDRESS_ERROR);
+    MY_ASSERT_RET(str,           ADDRESS_ERROR);
+    MY_ASSERT_RET(error_message, ADDRESS_ERROR);
 
     int check = 0;
 
@@ -39,6 +39,8 @@ ERROR InputMatch(int* ret_val, const char* error_message, const char** match_dat
     int check = 0;
 
     int* num_data = (int*)calloc(data_size, sizeof(int));
+    MY_ASSERT_RET(num_data, ADDRESS_ERROR);
+
     for (int i = 0; i < data_size; i++)
     {
         num_data[i] = i;
@@ -46,21 +48,14 @@ ERROR InputMatch(int* ret_val, const char* error_message, const char** match_dat
 
     while (true)
     {
-        while (true)
+        while ((check = scanf("%m[^\n]", &str)) != 1)
         {
-            check = scanf("%m[^\n]", &str);
+            if (check == EOF) clearerr(stdin);
+            else              getchar();
 
-            if (check != 1)
-            {
-                if (check == EOF) clearerr(stdin);
-                else              getchar();
-
-                printf(RED "%s\n" RESET_COLOR, error_message);
-                continue;
-            }
-            getchar();
-            break;
+            printf(RED "%s\n" RESET_COLOR, error_message);
         }
+        getchar();
 
         int len = strlen(str);
 

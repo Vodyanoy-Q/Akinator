@@ -11,8 +11,8 @@
 
 ERROR InsertNode(TreeNode** root, char* elem)
 {
-    MY_ASSERT(root, ADDRESS_ERROR);
-    MY_ASSERT(elem, ADDRESS_ERROR);
+    MY_ASSERT_RET(root, ADDRESS_ERROR);
+    MY_ASSERT_RET(elem, ADDRESS_ERROR);
 
     if (*root == NULL) CreateNode(root, elem);
 
@@ -30,11 +30,11 @@ ERROR InsertNode(TreeNode** root, char* elem)
 
 ERROR CreateNode(TreeNode** root, const char* elem)
 {
-    MY_ASSERT(root, ADDRESS_ERROR);
-    MY_ASSERT(elem, ADDRESS_ERROR);
+    MY_ASSERT_RET(root, ADDRESS_ERROR);
+    MY_ASSERT_RET(elem, ADDRESS_ERROR);
 
     TreeNode* new_node = (TreeNode*)calloc(1, sizeof(TreeNode));
-    MY_ASSERT(new_node, CALLOC_ERROR);
+    MY_ASSERT_RET(new_node, CALLOC_ERROR);
 
     new_node->left  = NULL;
     new_node->right = NULL;
@@ -64,14 +64,14 @@ ERROR TreeDump(TreeNode* root)
 
     FILE* file = NULL;
 
-    _FOPEN(file, "tree.dot", "w");
+    MY_FOPEN_RET(file, "tree.dot", "w");
     fprintf(file, "digraph {\n");
 
     TreeObhod(root, file);
 
     fprintf(file, "}\n");
 
-    _FCLOSE(file);
+    MY_FCLOSE_RET(file);
 
     system("dot tree.dot -T png -o tree.png");
 
@@ -98,8 +98,8 @@ ERROR TreeObhod(TreeNode* node, FILE* file)
 
 ERROR GetFileSymbolsCount(FILE* file, size_t* symb_count)
 {
-    MY_ASSERT(file,       ADDRESS_ERROR);
-    MY_ASSERT(symb_count, ADDRESS_ERROR);
+    MY_ASSERT_RET(file,       ADDRESS_ERROR);
+    MY_ASSERT_RET(symb_count, ADDRESS_ERROR);
 
     struct stat st;
 
@@ -113,8 +113,8 @@ ERROR GetFileSymbolsCount(FILE* file, size_t* symb_count)
 
 ERROR GetStrCount(char* buff, int* str_count)
 {
-    MY_ASSERT(buff,      ADDRESS_ERROR);
-    MY_ASSERT(str_count, ADDRESS_ERROR);
+    MY_ASSERT_RET(buff,      ADDRESS_ERROR);
+    MY_ASSERT_RET(str_count, ADDRESS_ERROR);
 
     int str_c = 0;
 
@@ -150,15 +150,15 @@ ERROR DeleteTree(TreeNode** node)
 
 ERROR TreeToFile(const char* file_name, TreeNode* node)
 {
-    MY_ASSERT(file_name, ADDRESS_ERROR);
+    MY_ASSERT_RET(file_name, ADDRESS_ERROR);
 
     FILE* file = NULL;
 
-    _FOPEN(file, file_name, "w")
+    MY_FOPEN_RET(file, file_name, "w");
 
     FprintTree(node, file, 0);
 
-    _FCLOSE(file);
+    MY_FCLOSE_RET(file);
 
     return NO_ERROR;
 }
@@ -167,20 +167,42 @@ ERROR FprintTree(TreeNode* node, FILE* file, int tab)
 {
     if (node == NULL) return NO_ERROR;
 
-    STR_PRINT;
+    TabPrint(tab, file);
+    fprintf(file, "%s\n", node->data);
 
     if (node->left != NULL && node->right != NULL)
     {
-        OPEN_PRINT;
+        TabPrint(tab, file);
+        fprintf(file, "(\n");
+        tab++;
 
         if (node->left  != NULL) FprintTree(node->left, file, tab);
 
-        CLOSE_PRINT;
-        OPEN_PRINT;
+        tab--;
+        TabPrint(tab, file);
+        fprintf(file, ")\n");
+
+        TabPrint(tab, file);
+        fprintf(file, "(\n");
+        tab++;
 
         if (node->right != NULL) FprintTree(node->right, file, tab);
 
-        CLOSE_PRINT;
+        tab--;
+        TabPrint(tab, file);
+        fprintf(file, ")\n");
+    }
+
+    return NO_ERROR;
+}
+
+ERROR TabPrint(int tab, FILE* file)
+{
+    MY_ASSERT_RET(file, ADDRESS_ERROR);
+
+    for (int j = 0; j < tab; j++)
+    {
+        fprintf(file, "    ");
     }
 
     return NO_ERROR;
@@ -188,12 +210,12 @@ ERROR FprintTree(TreeNode* node, FILE* file, int tab)
 
 ERROR TreeFromFile(const char* file_name, TreeNode** node)
 {
-    MY_ASSERT(file_name, ADDRESS_ERROR);
-    MY_ASSERT(node,      ADDRESS_ERROR);
+    MY_ASSERT_RET(file_name, ADDRESS_ERROR);
+    MY_ASSERT_RET(node,      ADDRESS_ERROR);
 
     FILE* file = NULL;
 
-    _FOPEN(file, file_name, "rb");
+    MY_FOPEN_RET(file, file_name, "rb");
 
     size_t symb_count = 0;
 
@@ -201,12 +223,12 @@ ERROR TreeFromFile(const char* file_name, TreeNode** node)
 
     if (symb_count == 0)
     {
-        _FCLOSE(file);
+        MY_FCLOSE_RET(file);
         return NO_ERROR;
     }
 
     char* buff = (char*)calloc(symb_count, sizeof(char));
-    MY_ASSERT(buff, CALLOC_ERROR);
+    MY_ASSERT_RET(buff, CALLOC_ERROR);
 
     if (fread((void*)buff, sizeof(char), symb_count, file) != symb_count)
     {
@@ -215,55 +237,48 @@ ERROR TreeFromFile(const char* file_name, TreeNode** node)
         return FILE_READ_ERROR;
     }
 
-    _FCLOSE(file);
+    MY_FCLOSE_RET(file);
     buff[symb_count] = '\0';
 
     int pos = 0;
 
-    RecTreeFromFile(buff, &pos, node);
+    RecTreeFromFile(buff, &pos, 0, node);
 
     free(buff);
 
     return NO_ERROR;
 }
 
-ERROR SpaceSkip(char* str, int* pos)
+ERROR RecTreeFromFile(char* buff, int* pos, int tab, TreeNode** node)
 {
-    while (isspace(*(str + *pos))) *pos = *pos + 1;
-
-    return NO_ERROR;
-}
-
-ERROR RecTreeFromFile(char* buff, int* pos, TreeNode** node)
-{
-    if (*(buff + *pos) == '\0') return NO_ERROR;
-
-    SpaceSkip(buff, pos);
+    *pos += tab * 4;
 
     char* find_n = strchr(buff + *pos, '\n');
     *find_n = '\0';
 
     int len = find_n - (buff + *pos);
+
     char* str = strndup(buff + *pos, len + 1);
-    *pos += len + 1;
 
     CreateNode(node, str);
 
-    SpaceSkip(buff, pos);
+    *pos += len + 1;
 
-    if (*(buff + *pos) == '(')
+    int space_count = 0;
+    GetSpaceCount(buff, *pos, &space_count);
+
+    if (space_count == tab * 4)
     {
-        *pos += 2;
-        RecTreeFromFile(buff, pos, &(*node)->left);
-        RecTreeFromFile(buff, pos, &(*node)->right);
-        *pos += 2;
-    }
-    else if (*(buff + *pos) == ')')
-    {
-        *pos += 2;
-        SpaceSkip(buff, pos);
-        *pos += 2;
-        return NO_ERROR;
+        *pos += space_count;
+        if (*(buff + *pos) == '(')
+        {
+            *pos += 2;
+            RecTreeFromFile(buff, pos, tab + 1, &(*node)->left);
+
+            *pos += (tab * 4 + 2) * 2;
+            RecTreeFromFile(buff, pos, tab + 1, &(*node)->right);
+            *pos += tab * 4 + 2;
+        }
     }
 
     return NO_ERROR;
@@ -271,8 +286,8 @@ ERROR RecTreeFromFile(char* buff, int* pos, TreeNode** node)
 
 ERROR GetSpaceCount(char* buff, int pos, int* space_count)
 {
-    MY_ASSERT(buff,        ADDRESS_ERROR);
-    MY_ASSERT(space_count, ADDRESS_ERROR);
+    MY_ASSERT_RET(buff,        ADDRESS_ERROR);
+    MY_ASSERT_RET(space_count, ADDRESS_ERROR);
 
     int i = 0;
 
